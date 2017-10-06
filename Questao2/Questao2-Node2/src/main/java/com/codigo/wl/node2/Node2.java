@@ -7,6 +7,7 @@ package com.codigo.wl.node2;
  */ 
 
 import com.codigo.wl.questao2.shared.impl.Persistir;
+import com.codigo.wl.questao2.shared.impl.Persistir_Thread;
 import java.io.IOException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -17,7 +18,8 @@ public class Node2 {
 
         try {
             Registry registry = LocateRegistry.createRegistry(10934);
-            registry.bind("Node2", new Persistir());
+            registry.bind("Node2", new Persistir());//NORMAL
+//            registry.bind("Node2", new Persistir_Thread());//COM THREAD -- Precisa reparos
 
             System.out.println("Servidor Node2 Pronto para persistir a Lista de Usuarios!");
       
