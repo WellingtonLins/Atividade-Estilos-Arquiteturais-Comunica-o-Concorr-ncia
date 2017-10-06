@@ -20,7 +20,7 @@ public class Node1 {
             Registry registry = LocateRegistry.getRegistry(10934);//NODE_2
             InterfacePersistir remoto = (InterfacePersistir) registry.lookup("Node2");
             List lista = new ArrayList();
-            for (int i = 1; i <= 1000; i++) {
+            for (int i = 1; i <= 100; i++) {
                 lista.add(new User("User" + i));
             }
             remoto.persistir(lista);

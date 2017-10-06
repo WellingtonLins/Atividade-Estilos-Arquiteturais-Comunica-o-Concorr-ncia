@@ -29,47 +29,37 @@ public class Persistir extends UnicastRemoteObject implements
 
     @Override
     public void persistir(List<User> userList) throws RemoteException {
+
         EntityManagerFactory emfPostgre = Persistence.createEntityManagerFactory("Postgre-PU");
         EntityManager em1 = emfPostgre.createEntityManager();
-
-        inicioPostgre = System.currentTimeMillis();
-
-        for (User user : userList) {
-            try {
-                em1.getTransaction().begin();
-
-                em1.persist(user);
-
-                em1.getTransaction().commit();
-            } catch (Exception e) {
-                e.printStackTrace();
-                em1.getTransaction().rollback();
-            }
-        }
-
-        fimPostgre = System.currentTimeMillis();
-        xPostgre = (int) (fimPostgre - inicioPostgre);
-        System.out.println("\nTEMPO DECORRIDO PARA O POSTGRE " + xPostgre + "\n");
-
-        em1.close();
-        emfPostgre.close();
 
         EntityManagerFactory emfMysql = Persistence.createEntityManagerFactory("Mysql-PU");
         EntityManager em2 = emfMysql.createEntityManager();
 
+        inicioPostgre = System.currentTimeMillis();
         inicio = System.currentTimeMillis();
         for (User user : userList) {
             try {
+                em1.getTransaction().begin();
                 em2.getTransaction().begin();
-
+                em1.persist(user);
                 em2.persist(user);
-
+                em1.getTransaction().commit();
                 em2.getTransaction().commit();
             } catch (Exception e) {
                 e.printStackTrace();
+                em1.getTransaction().rollback();
                 em2.getTransaction().rollback();
             }
+            fimPostgre = System.currentTimeMillis();
+            xPostgre = (int) (fimPostgre - inicioPostgre);
+
         }
+        em1.close();
+        emfPostgre.close();
+
+        System.out.println("\nTEMPO DECORRIDO PARA O POSTGRE " + xPostgre + "\n");
+
         fim = System.currentTimeMillis();
         x = (int) (fim - inicio);
         System.out.println("\nTEMPO DECORRIDO PARA O MySQL " + x + "\n");
