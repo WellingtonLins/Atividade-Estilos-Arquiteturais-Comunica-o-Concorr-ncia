@@ -18,8 +18,8 @@ public static void main(String[] args) {
         }
          System.out.println(queue.toString());
         for (int i = 1; i < 8; i++) {
-            System.out.println("Trying to add to queue: People " + i
-                    + " and the result was " + queue.offer(new People(i, "People " + i)));
+            System.out.println("Tentando adicionar na queue: People " + i
+                    + " resultado " + queue.offer(new People(i, "People " + i)));
         }
         queue.element().setStatusAttendance(true);
         System.out.println(queue.toString());
