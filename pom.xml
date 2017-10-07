@@ -9,6 +9,7 @@
         <module>Questao1</module>
         <module>Questao2</module>
         <module>Questao4</module>
+        <module>Questao3</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
